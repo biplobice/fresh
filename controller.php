@@ -28,10 +28,17 @@ class Controller extends Package
 
     public function on_start()
     {
+        $this->registerAutoload();
+
         if ($this->app->resolved('console')) {
             $this->app->make('console')->add($this->app->make(SeedCommand::class));
             $this->app->make('console')->add($this->app->make(CleanCommand::class));
         }
+    }
+
+    protected function registerAutoload()
+    {
+        require $this->getPackagePath() . '/vendor/autoload.php';
     }
 
 }
